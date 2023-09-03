@@ -1,0 +1,97 @@
+@charset "UTF-8";
+
+@for $i from 0 to 11 {
+	.mt-#{$i} {
+		margin-top: $i * 0.5rem;
+	}
+
+	.mb-#{$i} {
+		margin-bottom: $i * 0.5rem;
+	}
+
+	.mr-#{$i} {
+		margin-right: $i * 0.5rem;
+	}
+
+	.ml-#{$i} {
+		margin-left: $i * 0.5rem;
+	}
+
+	.my-#{$i} {
+		margin: $i * 0.5rem 0;
+	}
+
+	.mx-#{$i} {
+		margin: 0 $i * 0.5rem;
+	}
+}
+
+$grid: 12;
+
+.grid {
+	display: grid;
+	grid-template-columns: repeat($grid, 1fr);
+	gap: 1.5rem;
+
+	@for $i from 1 to $grid +1 {
+		.col-#{$i} {
+			grid-column: span $i / span $i;
+		}
+	}
+
+	&.-gap-y-0 {
+		gap: 0 1.5rem;
+	}
+
+	&.-gap-x-0 {
+		gap: 1.5rem 0;
+	}
+
+	+.grid {
+		margin-top: 1.5rem;
+	}
+}
+
+.flex {
+	display: flex;
+	justify-content: space-between;
+	gap: 1.5rem;
+
+	&.-center {
+		justify-content: center;
+	}
+
+	&.-start {
+		justify-content: flex-start;
+	}
+
+	&.-end {
+		justify-content: flex-end;
+	}
+
+	@for $i from 0 to 6 {
+		&.-gap-#{$i} {
+			gap: $i * 0.5rem;
+		}
+	}
+
+	@for $i from 1 to $grid +1 {
+		.col-#{$i} {
+			flex: $i;
+		}
+	}
+
+	.col-auto {
+		flex: auto;
+	}
+}
+
+@media screen and (max-width:1024px) {
+	.grid {
+		grid-template-columns: repeat(4, 1fr);
+
+		[class^=col-] {
+			grid-column: span 4/ span 4;
+		}
+	}
+}
